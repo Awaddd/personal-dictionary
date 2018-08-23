@@ -7,6 +7,7 @@
 
 <style lang="scss" scoped>
         footer {
+        align-self: end;
         
         padding: 20px 0;
         h3 {
@@ -31,7 +32,6 @@
         // Temp styles below
         position: -webkit-sticky;
 
-        align-self: end;
         bottom: 0;
             h3 {
                 font-size: 1rem;
