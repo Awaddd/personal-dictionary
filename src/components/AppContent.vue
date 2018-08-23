@@ -1,10 +1,10 @@
 <template>
     <main>
-        <p class="heavy">Learning a language? Need to keep track of your words?</p>
-
-        <p> Simple enter a new word you have learnt and hit enter or click the button below to add it to your Pocket Dictionary</p>
-       
-        <add-word @word-added="addWord"
+        <div class="main-text">
+            <p class="heavy">Learning a language? Need to keep track of your words?</p>
+            <p> Simple enter a new word you have learnt and hit enter or click the button below to add it to your Pocket Dictionary</p>
+        </div>
+        <add-word @word-added="onAdd"
         :definitionOption="moreOptions"></add-word>
 
 
@@ -30,9 +30,13 @@
 </template>
 
 <script>
+import db from '../db'
 import AddWord from './AddWord.vue';
 import results from './Results.vue';
 export default {
+    created () {
+        this.getDictionary()
+    },
     data: function () {
         return {
             dictionary: [
@@ -44,12 +48,26 @@ export default {
         }
     },
     methods: {
-        addWord(word){
-            this.dictionary.push(word);
-        },
+        // addWord(word){
+        //     this.dictionary.push(word);
+        // },
         changeOptions (bool) {
             this.moreOptions = bool;
             this.bool2 = !this.bool2;
+        },
+        getDictionary(){
+            db.collection('Dictionary').get().then(querySnapshot => {
+                const dictionary = []
+                querySnapshot.forEach(doc => {
+                    // console.log(doc.data())
+                    dictionary.push(doc.data())
+                })
+
+                this.dictionary = dictionary
+            })
+        },
+        onAdd(word){
+            db.collection('Dictionary').add(word).then(this.getDictionary)
         }
     },
     components: {
@@ -67,12 +85,16 @@ export default {
         grid-gap: 30px;
         align-self: start;
 
+        .main-text p{
+            margin: 10px 0;
+        }
+
         p {
             font-size: 0.90rem;
         }
 
         .heavy {
-            font-weight: 900;
+            font-weight: 600;
         }
 
         .table-options{
