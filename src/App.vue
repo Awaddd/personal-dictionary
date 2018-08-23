@@ -18,7 +18,6 @@ export default {
 
 <style lang="scss">
 
-$g: #8CE5B5;
 
 body, html {
   margin: 0;
@@ -51,33 +50,16 @@ li {
 }
 
 a {
-  color: #42b983;
+  color: $accent;
 }
 
 p {
   margin: 0;
 }
 
-
-input {
-  padding: 0.5rem;
-  border-radius: 2px;
-  border: 1px solid #eee;
-            }
-
-button {
-  color: #fff;
-  background: $g;
-  border: 0;
-  border-radius: 2px;
-  padding: 7px 15px;
-  font-size: 0.70rem;
-  font-weight: 700;
-  text-transform: uppercase;
+i {
   cursor: pointer;
+  color: $accent
 }
-
-
-
 
 </style>

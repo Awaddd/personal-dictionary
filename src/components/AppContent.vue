@@ -1,14 +1,31 @@
 <template>
     <main>
         <p class="heavy">Learning a language? Need to keep track of your words?</p>
-        <!-- <p>Enter new words you've learnt and hit enter</p> -->
+
         <p> Simple enter a new word you have learnt and hit enter or click the button below to add it to your Pocket Dictionary</p>
-        <add-word @word-added="addWord"></add-word>
-        <p class="table-options">Want more options? <button class="arrow" @click="addFields">^</button></p> 
-        <p v-if="dictionary.length < 1" class="heavy">Your words will appear below - add them above first!</p>
-        <results :results="dictionary" 
-        v-else
-        ></results>
+       
+        <add-word @word-added="addWord"
+        :definitionOption="moreOptions"></add-word>
+
+
+        <p v-if="bool2 === true" class="table-options">Want more options? 
+            
+            <i class="material-icons md-36"
+            @click="changeOptions(true)">expand_more</i>
+            
+        </p> 
+        <p v-else class="table-options">Less options? 
+            
+            <i class="material-icons md-36"
+            @click="changeOptions(false)">expand_less</i>
+            
+        </p> 
+
+        
+        <p v-if="dictionary.length < 1" class="heavy">Your words will appear below 
+            - add them above first!</p>
+        
+        <results :results="dictionary" v-else></results>
     </main>
 </template>
 
@@ -20,7 +37,9 @@ export default {
         return {
             dictionary: [
                 
-            ]
+            ],
+            moreOptions: false,
+            bool2: true
             // definitionField: false
         }
     },
@@ -28,8 +47,9 @@ export default {
         addWord(word){
             this.dictionary.push(word);
         },
-        addFields() {
-            this.definitionField = !this.definitionField;
+        changeOptions (bool) {
+            this.moreOptions = bool;
+            this.bool2 = !this.bool2;
         }
     },
     components: {
@@ -53,12 +73,6 @@ export default {
 
         .heavy {
             font-weight: 900;
-        }
-
-        .arrow {
-            transform: rotateX(180deg);
-            font-size: 1rem;
-            padding: 5px 12px;
         }
 
         .table-options{

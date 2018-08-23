@@ -1,9 +1,21 @@
 <template>
     <section>
-        <label for="addWord">Word</label>
         <form @submit.prevent="addWord">
-            <input type="text" id="addWord" v-model="word">
-            <button>Add Word</button>
+            <div class="input-group">
+                <label for="addWord">Word</label>
+                <div class="input-row">
+                    <input type="text" id="addWord" v-model="word">
+                    <button v-if="!definitionOption">Add Word</button>
+                </div>
+            </div>
+            
+            <div class="input-group" v-if="definitionOption">
+                <label for="addDefinition">Definition</label>
+                <div class="input-row" >
+                    <input type="text" id="addDefinition" v-model="definition">
+                    <button>Add</button>
+                </div>
+            </div>
         </form>
     </section>
 </template>
@@ -11,26 +23,67 @@
 <script>
 // import {eventBus} from '../main';
 
+// temp solution to test if object is empty
+function isEmpty(obj) {
+    for(var key in obj) {
+        if(obj.hasOwnProperty(key))
+            return false;
+    }
+    return true;
+}
+
 export default {
+    props: {
+        definitionOption: Boolean
+    },
     data() {
         return {
-            word: null
+            word: null,
+            definition: null
             // definition: null
+        }
+    },
+    computed: {
+        wordEntered () {
+            if(this.word != null  && this.word != ""){
+                return true
+            } else {
+                return false
+            }
+        },
+        definitionEntered () {
+            if(this.definition != null && this.definition != ""){
+                return true
+            } else {
+                return false
+            }
         }
     },
     methods: {
         addWord: function() {
-
+            console.log("word:",this.wordEntered);
+            console.log(this.definitionEntered);
             let dictionaryEntry = {
-                word: this.word
-                // definition: this.definition
+
             };
-            this.$emit('word-added', dictionaryEntry);
-            // Need to traverse through parent to get to child so we can conditionally
-            // render results to display only when results contains something
-            // if not we could use below eventbus syntax
-            // eventBus.$emit('word-added', dictionaryEntry);
+            if (this.wordEntered == true && this.definitionEntered == true){
+                dictionaryEntry = {
+                    word: this.word,
+                    definition: this.definition
+                };
+
+            } else if (this.wordEntered == true && this.definitionEntered == false){
+                dictionaryEntry = {
+                    word: this.word,
+                    definition: null
+                };                
+            }
+
+            if (!isEmpty(dictionaryEntry)){
+                this.$emit('word-added', dictionaryEntry);
+            }
             this.word = null;
+            this.definition = null;
             
         }
     }
@@ -49,17 +102,15 @@ export default {
         justify-items: start;
 
         form {
-            width: 100%;
             display: grid;
-            grid-template-columns: 4fr 3fr;
-            grid-gap: 10px;
-
+            grid-gap: 25px;
         }
 
         label {
            font-size: 0.70rem;;
            font-weight: 900;
-           color: #757575;
+        //    color: #757575;
+            color: $accent;
         }
     }
 
