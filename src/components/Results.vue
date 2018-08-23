@@ -20,7 +20,7 @@
                     <div class="table-row" v-for="(words, i) in results" :key="i">
                         <div>{{i}}</div>
                         <div>{{words.word}}</div>
-                        <div>Undefined</div>
+                        <div>{{words.definition}}</div>
                     </div>
                     <!-- <div class="table-row">
                         <div>{{result}}</div>
