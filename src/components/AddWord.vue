@@ -61,8 +61,6 @@ export default {
     },
     methods: {
         addWord: function() {
-            console.log("word:",this.wordEntered);
-            console.log(this.definitionEntered);
             let dictionaryEntry = {
 
             };
