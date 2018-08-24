@@ -1,20 +1,18 @@
 <template>
   <div id="app">
-    <app-header></app-header>
-    <app-content></app-content>
-    <app-footer></app-footer>
+
+    <app-header>
+      <!-- <div id="nav">
+        <router-link to="/">Home</router-link> |
+        <router-link to="/dictionary">dictionary</router-link>
+      </div> -->
+    </app-header>
+
+    <router-view/>
+
+    <app-footer/>
   </div>
 </template>
-
-<script>
-export default {
-  data () {
-    return {
-
-    }
-  }
-}
-</script>
 
 <style lang="scss">
 
@@ -33,6 +31,11 @@ body, html {
   min-height: 100%;
   align-content:start;
   grid-template-rows: max-content max-content 1fr;
+}
+
+.router-link-active, .router-link-exact-active{
+  color :#fff;
+  text-decoration: none;
 }
 
 h1, h2, h3, h4 {

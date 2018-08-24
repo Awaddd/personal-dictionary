@@ -1,6 +1,8 @@
 <template>
     <header>
-        <!-- <div class="logo"></div> -->
+        <div class="nav-links">
+            <slot></slot>
+        </div>
         <h1>Introducting Pocket Dictionary</h1>
         <p>Learn at your own convenience</p>
     </header>
@@ -13,16 +15,6 @@
         // height: 200px; for pc
         height: 150px;
 
-        // .logo {
-        // background: url(../assets/logo-sm.png);
-        // width: 35px;
-        // padding: 20px;
-        // position: fixed;
-        // z-index: 0;
-        // opacity: 0.3;
-        // margin: 15px 60px;
-        // }
-
         display: grid;
         grid-template-rows: max-content max-content;
         color: #fff;
@@ -33,6 +25,8 @@
         img {
             opacity: 0.1;
         }
+
+
 
         h1 {
             margin: 0;
