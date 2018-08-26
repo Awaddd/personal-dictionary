@@ -118,6 +118,13 @@ export default {
         // Margin 0 auto centering everything in middle! keep in mind
           margin: 0 auto;
           padding: 3rem 2.5rem;
+          width: 65%;
+        }
+    }
+
+    @media only screen and (min-width: 1200px) {
+        main {
+          width: 50%;
         }
     }
 </style>

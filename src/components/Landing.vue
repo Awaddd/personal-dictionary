@@ -3,43 +3,67 @@
       <div class="container">
     
         <section class="head">
-          <div class="logo">
-              <div class="logo-img">  
-                  <!-- <img src="./img/material-mic.png" alt="" > -->
-              </div>
-        </div>
           <h2 class="welcome-text"> P<span class="brand">ocket</span> </h2>
           <span class="slogan">
             Okay Google. What does semantic mean?
           </span>
         </section>
+        
+        
+        <section class="login" v-if="isRegister == false">
+          <form>
 
-        <section class="login">
+            <label for="username">Email
+            <input type="text" value="Abubakar08@mail.com">
+            </label>
+            <label for="password">Password
+            <input type="password" value="password">
+            </label>
+
+            <label for="password">Confirm Password
+            <input type="password" value="password">
+            </label>
+            
+            <div>
+                <button class="sign-in" @click.stop.prevent="processForm('register')">
+                  Register
+                </button>
+            </div>
+
+
+            
+
+          </form>
+        
+
+          <p class="sign-up" @click="isRegister = !isRegister">Got an account? Login</p>
+
+        </section>
+
+        <section class="login" v-else>
 
           <form>
 
             <label for="username">Email
-            <input type="text" id="username" value="Abubakar08@mail.com">
+            <input type="text" value="Abubakar08@mail.com">
             </label>
             <label for="password">Password
-            <input type="password" id="password" value="password">
+            <input type="password" value="password">
             </label>
             
-              <router-link to="/dictionary">
-                <button class="sign-in">
+            <div>
+                <button class="sign-in" @click.stop.prevent="processForm('login')">
                   Login
                 </button>
-              </router-link>
+            </div>
+
             
 
           </form>
+          <p class="sign-up" @click="isRegister = !isRegister">Sign up for an account</p>
+        
 
-          <p class="sign-up">Sign up for an account</p>
 
-        </section>
-        <section class="login-footer">
-          <!-- make footer stick to bottom -->
-            <!-- {{footerText}} <br> Copyright &copy {{team}} 2017 -->
         </section>
 
       </div>
@@ -49,6 +73,23 @@
 <script>
 export default {
   name: "Landing",
+  data() {
+      return {
+        isRegister: false
+      }
+  },
+  methods: {
+      processForm(formType){
+          if (formType == 'register') {
+
+              this.isRegister = true;
+
+          } else if (formType == 'login'){
+            
+            this.$router.push("/dictionary");
+          }
+      }
+  }
 };
 </script>
 
@@ -65,8 +106,8 @@ button {
 
 .container{
     display: grid;
-    grid-template-rows: 1fr 2fr;
-    padding: 10px 0;
+    grid-template-rows: max-content 2fr;
+    grid-gap: 50px;
     justify-self: center;
     align-self: center;
     align-items: start;
@@ -77,56 +118,9 @@ button {
 
 .head{
     display: grid;    
-    grid-template-rows: 1fr max-content 1fr;
-    align-content: center;
-    /* background: red; */
-}
-
-.logo{
-    /* width: 80px;
-    height: 80px; */
-    /* background: rgba(228, 228, 228, 0.2); */
-    /* background: rgb(160, 83, 233); */
-    /* border-radius: 15px; */
-    /* transform: rotate(340deg); */
-    /* transform: rotate(20deg); */
-    justify-self: center;
-    /* margin: 0 40px 0 0; */
-    display: grid;
-    grid-template-columns: max-content max-content;
-    
-}
-
-.logo-img{
-    justify-self: start;
-    align-self: center;
-    /* width: 62px;
-    height: 45px; */
-    width: 40px;
-    height: 40px;
-    /* height: auto; */
-    /* background: url(../img/testlogo.png); */
-    // background: url(../img/light.png);
-    background-position-x: 0%;
-    background-position-y: 0%;
-    background-position: center;
-    background-size: contain;
-    /* background-color: #25B7D3; */
-    border-radius: 30px;
-    /* transform: rotate(20deg); */
-    margin: 2px 5px 0 0;
-    
-}
-
-.logo-text{
-    align-self: center;
-    /* border-bottom: 3px solid #25B7D3;     */
-    /* padding: 0 2px 5px 2px; */
-    font-size: 1.15rem;
-    background: linear-gradient(to right, $primary, $accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    
+    grid-template-rows: max-content 1fr;
+    align-items: end;
+    margin-top: 20px;
 }
 
 .welcome-text{
@@ -171,11 +165,10 @@ button {
 
 .sign-in{
     background: $accent;
-    border: 0;
-    padding: 10px 80px;
+    padding: 13px 80px;
     text-transform: uppercase;
     color: #fff;
-    font-size: 0.90rem;
+    font-size: 0.80rem;
     border-radius: 20px;
     font-weight: 600;
     cursor: pointer;
@@ -201,11 +194,22 @@ button {
 
 
 @media only screen and (min-width: 700px) {
+    .head {
+        align-self: center;
+        margin: 20px 0;
+    }
     .login {
       min-height: 400px;
     }
     .container {
       max-width: 700px;
+      grid-gap: 40px;
+    }
+}
+
+@media only screen and (min-width: 1600px) {
+    .head {
+        margin: 40px 0;
     }
 }
 </style>

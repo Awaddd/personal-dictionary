@@ -52,7 +52,7 @@ export default {
 
 
 <style lang="scss" scoped>
-    $g: #8CE5B5;
+
 
     section {
         display: grid;
@@ -61,7 +61,7 @@ export default {
         p {
            font-size: 0.90rem;
            font-weight: 900;
-           color: $g;
+           color: $accent;
         }
 
         .results-table {
@@ -81,7 +81,7 @@ export default {
 
             }
             .table-head{
-                background: $g;
+                background: $primary;
                 color: #fff;
                 border-radius: 2px 2px 0 0;
                 font-size: 0.90rem;
