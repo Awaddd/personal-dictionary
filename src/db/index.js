@@ -1,5 +1,6 @@
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import 'firebase/firestore'
+import 'firebase/auth'
 
 // Initialize Firebase
 const config = {
@@ -11,6 +12,12 @@ const config = {
     messagingSenderId: "279716920378"
 }
 
-const firebaseapp = firebase.initializeApp(config)
+firebase.initializeApp(config)
 
-export default firebaseapp.firestore()
+const db = firebase.firestore()
+const firebaseAuth = firebase.auth()
+
+export {
+    db,
+    firebaseAuth
+}

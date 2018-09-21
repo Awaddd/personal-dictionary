@@ -60,8 +60,9 @@ export default {
 
         p {
            font-size: 0.90rem;
-           font-weight: 900;
-           color: $accent;
+           font-weight: 600;
+           color: $text;
+           margin: 0.5rem 0;
         }
 
         .results-table {
@@ -92,7 +93,9 @@ export default {
             .table-row {
                 border-bottom: 1px solid #eee;
                 font-size: 0.80rem;
-                
+                // Temporary below
+                line-height: 1.5;
+                letter-spacing: 0.5px;
             }
             
         }

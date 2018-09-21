@@ -3,9 +3,9 @@
       <div class="container">
     
         <section class="head">
-          <h2 class="welcome-text"> P<span class="brand">ocket</span> </h2>
+          <h2 class="welcome-text"><span class="brand"></span> </h2>
           <span class="slogan">
-            Okay Google. What does semantic mean?
+            Language. Forever annihilating the barriers of communication.
           </span>
         </section>
         
@@ -14,18 +14,18 @@
           <form>
 
             <label for="username">Email
-            <input type="text" value="Abubakar08@mail.com">
+            <input type="text" value="Abubakar08@mail.com" v-model="registerDetails.email">
             </label>
             <label for="password">Password
-            <input type="password" value="password">
+            <input type="password" value="password" v-model="registerDetails.password">
             </label>
 
             <label for="password">Confirm Password
-            <input type="password" value="password">
+            <input type="password" value="password" v-model="registerDetails.confirmPassword">
             </label>
             
             <div>
-                <button class="sign-in" @click.stop.prevent="processForm('register')">
+                <button class="sign-in" @click.stop.prevent="processForm($event, 'register')">
                   Register
                 </button>
             </div>
@@ -45,14 +45,14 @@
           <form>
 
             <label for="username">Email
-            <input type="text" value="Abubakar08@mail.com">
+            <input type="text" value="Abubakar08@mail.com" v-model="loginDetails.email">
             </label>
             <label for="password">Password
-            <input type="password" value="password">
+            <input type="password" value="password" v-model="loginDetails.password">
             </label>
             
             <div>
-                <button class="sign-in" @click.stop.prevent="processForm('login')">
+                <button class="sign-in" @click.stop.prevent="processForm($event, 'login')">
                   Login
                 </button>
             </div>
@@ -71,23 +71,59 @@
 </template>
 
 <script>
+import {firebaseAuth} from '../db';
+
+
 export default {
   name: "Landing",
   data() {
       return {
-        isRegister: false
+        isRegister: false,
+        registerDetails: {
+            email: '',
+            password: '',
+            confirmPassword: ''
+        },
+        loginDetails: {
+            email: '',
+            password: ''
+        }
       }
   },
   methods: {
-      processForm(formType){
-          if (formType == 'register') {
+      processForm(event, formType){
+        event.preventDefault();
 
-              this.isRegister = true;
+        if (formType === 'register') {
 
-          } else if (formType == 'login'){
+            if (this.registerDetails.password === this.registerDetails.confirmPassword) {
+                firebaseAuth
+                    .createUserWithEmailAndPassword(this.registerDetails.email, this.registerDetails.password)
+                    .then(
+                        data => {
+                            alert(`Account created for ${data.user.email}`);
+                            this.$router.push("/dictionary");                            
+                        },
+                        err => {
+                            alert(err.message);
+                        }
+                    );
+            }
+
+        } else if (formType === 'login'){
             
-            this.$router.push("/dictionary");
-          }
+            firebaseAuth
+                .signInWithEmailAndPassword(this.loginDetails.email, this.loginDetails.password)
+                .then(
+                    data => {
+                        alert(`Logged in as ${data.user.email}`);
+                        this.$router.push("/dictionary");                            
+                    },
+                    err => {
+                        alert(err.message);
+                    }
+                );
+        }
       }
   }
 };
@@ -135,9 +171,10 @@ button {
 }
 
 .slogan{
-    color: rgb(156, 154, 154);
+    color: rgb(0, 0, 0);
     /* font-size: 0.90rem; */
     font-size: 0.70rem; 
+    font-weight: 600;
     text-align: center;
     /* text-transform: capitalize; */
 }
@@ -146,7 +183,7 @@ button {
 .login form{
     display: grid;
     grid-gap: 35px;
-    /* padding: 0 30px; */
+    padding: 0 1.2rem;
     /* background: red; */
 }
 
@@ -169,7 +206,7 @@ button {
     text-transform: uppercase;
     color: #fff;
     font-size: 0.80rem;
-    border-radius: 20px;
+    // border-radius: 20px;
     font-weight: 600;
     cursor: pointer;
 }
@@ -200,10 +237,18 @@ button {
     }
     .login {
       min-height: 400px;
+      align-content: center;
+    //   margin: 2rem 0;
     }
     .container {
       max-width: 700px;
       grid-gap: 40px;
+    }
+    .slogan {
+        font-size: 1rem;
+    }
+    .sign-up, .sign-in {
+        font-size: 0.70rem;
     }
 }
 

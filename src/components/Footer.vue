@@ -9,17 +9,15 @@
         footer {
         align-self: end;
         
-        padding: 20px 0;
+        padding: 0.50rem 0;
         h3 {
             text-align: center;
-            font-size: 0.85rem;
-            font-weight: 500;
-            
+            font-size: 0.85rem;    
 
             span {
                 font-weight: 600;
                 font-size: 1rem;
-                color: rgb(12, 226, 155);
+                color: $accent;
             }
         }
     }
@@ -28,16 +26,18 @@
         // cant get footer to stay at bottom :L
         footer {
         background: #fff;
-        border-top: 1px solid #eee;
+        // border-top: 1px solid #eee;
         // Temp styles below
         position: -webkit-sticky;
 
         bottom: 0;
             h3 {
-                font-size: 1rem;
-                font-weight: 500;
+                letter-spacing: 3px;
+                text-transform: uppercase;
+                font-size: 0.70rem;
+                font-weight: 600;
                 span {
-                    font-size: 1.2rem;
+                    font-size: 1.1rem;
                 }
             }
             

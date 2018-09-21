@@ -91,7 +91,6 @@ export default {
 
 <style lang="scss" scoped>
 
-    $g: #8CE5B5;
 
     section{
         display: grid;
@@ -108,7 +107,7 @@ export default {
            font-size: 0.70rem;;
            font-weight: 900;
         //    color: #757575;
-            color: $accent;
+            color: $sub-text;
         }
     }
 

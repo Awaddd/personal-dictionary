@@ -1,8 +1,9 @@
 <template>
     <main>
+
         <div class="main-text">
-            <p class="heavy">Learning a language? Need to keep track of your words?</p>
-            <p> Simple enter a new word you have learnt and hit enter or click the button below to add it to your Pocket Dictionary</p>
+            <p class="heavy">Learning a language? </p>
+            <p> Enter a word you have learnt and hit enter or click the button below to add it to your Pocket Dictionary</p>
         </div>
         <add-word @word-added="onAdd"
         :definitionOption="moreOptions"></add-word>
@@ -21,7 +22,6 @@
             
         </p> 
 
-        
         <p v-if="dictionary.length < 1" class="heavy">Your words will appear below 
             - add them above first!</p>
         
@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import db from '../db'
+import {db} from '../db';
 import AddWord from './AddWord.vue';
 import results from './Results.vue';
 export default {
@@ -90,11 +90,12 @@ export default {
         }
 
         p {
-            font-size: 0.90rem;
+            font-size: 0.85rem;
         }
 
         .heavy {
-            font-weight: 600;
+            font-weight: 300;
+            font-size: 1.15rem;
         }
 
         .table-options{
@@ -119,12 +120,17 @@ export default {
           margin: 0 auto;
           padding: 3rem 2.5rem;
           width: 65%;
+
         }
     }
 
     @media only screen and (min-width: 1200px) {
         main {
-          width: 50%;
+        width: 50%;
+            .heavy {
+                font-size: 1.3rem;
+            }
         }
+
     }
 </style>
