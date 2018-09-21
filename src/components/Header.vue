@@ -9,11 +9,45 @@
                 <p>Learn at your own convenience</p>
             </div>
 
-            <button class="logout">Logout</button>    
+            <div v-if="isLoggedIn === false"></div> 
+
+            <button @click="logout" 
+            v-if="isLoggedIn === true"
+            class="logout" >Logout</button>   
         </div>
     
     </header>
 </template>
+
+<script>
+import {firebaseAuth} from '../db';
+
+export default {
+    data () {
+        return {
+            isLoggedIn: false,
+            currentUser: false
+        }
+    },
+    created() {
+        if (firebaseAuth.currentUser) {
+            this.isLoggedIn = true;
+            this.currentUser = firebaseAuth.currentUser.email;
+        }
+    },
+    methods: {
+        logout: function() {
+            firebaseAuth
+                .signOut()
+                .then(() => {
+                    this.$router.push('/');
+                    this.isLoggedIn = false;
+                });
+        }
+    }
+}
+</script>
+
 
 
 <style lang="scss" scoped>

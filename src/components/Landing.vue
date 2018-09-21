@@ -101,8 +101,8 @@ export default {
                     .createUserWithEmailAndPassword(this.registerDetails.email, this.registerDetails.password)
                     .then(
                         data => {
-                            alert(`Account created for ${data.user.email}`);
-                            this.$router.push("/dictionary");                            
+                            // alert(`Account created for ${data.user.email}`);
+                            this.$router.go({path: this.$router.path});                  
                         },
                         err => {
                             alert(err.message);
@@ -116,8 +116,10 @@ export default {
                 .signInWithEmailAndPassword(this.loginDetails.email, this.loginDetails.password)
                 .then(
                     data => {
-                        alert(`Logged in as ${data.user.email}`);
-                        this.$router.push("/dictionary");                            
+                        // alert(`Logged in as ${data.user.email}`);
+                        // this.$router.push("/dictionary");       
+                        this.$router.go({path: this.$router.path});                  
+                     
                     },
                     err => {
                         alert(err.message);
