@@ -107,7 +107,7 @@ export default {
            font-size: 0.70rem;;
            font-weight: 900;
         //    color: #757575;
-            color: $sub-text;
+            color: $accent;
         }
     }
 

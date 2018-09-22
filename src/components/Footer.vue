@@ -12,11 +12,12 @@
         padding: 0.50rem 0;
         h3 {
             text-align: center;
-            font-size: 0.85rem;    
-
+            font-size: 0.55rem;    
+            letter-spacing: 3px;
+            text-transform: uppercase;
             span {
                 font-weight: 600;
-                font-size: 1rem;
+                font-size: 0.85rem;
                 color: $accent;
             }
         }

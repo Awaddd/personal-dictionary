@@ -3,7 +3,7 @@
 
         <div class="main-text">
             <p class="heavy">Learning a language? </p>
-            <p> Enter a word you have learnt and hit enter or click the button below to add it to your Pocket Dictionary</p>
+            <p>Keep track of words you've learnt by adding them to your personal collection below.</p>
         </div>
         <add-word @word-added="onAdd"
         :definitionOption="moreOptions"></add-word>
