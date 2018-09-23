@@ -9,7 +9,7 @@
         footer {
         align-self: end;
         
-        padding: 0.50rem 0;
+        padding: 1.5rem 0;
         h3 {
             text-align: center;
             font-size: 0.55rem;    
@@ -30,6 +30,7 @@
         // border-top: 1px solid #eee;
         // Temp styles below
         position: -webkit-sticky;
+        padding: 0.50rem 0;
 
         bottom: 0;
             h3 {

@@ -22,15 +22,15 @@
             
         </p> 
 
-        <p v-if="dictionary.length < 1" class="heavy">Your words will appear below 
-            - add them above first!</p>
+        <p v-if="dictionary.length < 1" class="heavy alternative-text">Your words will appear below 
+            - add them above first</p>
         
         <results :results="dictionary" v-else></results>
     </main>
 </template>
 
 <script>
-import {db} from '../db';
+import {firebaseAuth, db} from '../db';
 import AddWord from './AddWord.vue';
 import results from './Results.vue';
 export default {
@@ -56,7 +56,9 @@ export default {
             this.bool2 = !this.bool2;
         },
         getDictionary(){
-            db.collection('Dictionary').get().then(querySnapshot => {
+            // db.collection('Dictionary').get().then(querySnapshot => {
+            var user = firebaseAuth.currentUser;
+            db.collection('Users').doc(user.uid).collection('Dictionary').get().then(querySnapshot => {
                 const dictionary = []
                 querySnapshot.forEach(doc => {
                     // console.log(doc.data())
@@ -67,7 +69,10 @@ export default {
             })
         },
         onAdd(word){
-            db.collection('Dictionary').add(word).then(this.getDictionary)
+            // db.collection('Dictionary').add(word).then(this.getDictionary)
+                            var user = firebaseAuth.currentUser;
+            db.collection('Users').doc(user.uid).collection('Dictionary').add(word).then(this.getDictionary);
+            
         }
     },
     components: {
@@ -98,6 +103,12 @@ export default {
             font-size: 1.15rem;
         }
 
+        .alternative-text {
+            font-size: 1rem;
+            text-align: center;
+            color: #478DFC;
+        }
+
         .table-options{
             display: grid;
             grid-template-columns: max-content max-content;
@@ -120,7 +131,9 @@ export default {
           margin: 0 auto;
           padding: 3rem 2.5rem;
           width: 65%;
-
+            .alternative-text {
+                font-size: 1.3rem;
+            }
         }
     }
 

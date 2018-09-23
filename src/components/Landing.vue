@@ -5,7 +5,7 @@
         <section class="head">
           <h2 class="welcome-text"><span class="brand"></span> </h2>
           <span class="slogan">
-            Language. Forever annihilating the barriers of communication.
+            Forever annihilating the barriers of communication.
           </span>
         </section>
         
@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import {firebaseAuth} from '../db';
+import {firebaseAuth, db} from '../db';
 
 
 export default {
@@ -101,6 +101,7 @@ export default {
                     .createUserWithEmailAndPassword(this.registerDetails.email, this.registerDetails.password)
                     .then(
                         data => {
+                            var user = firebaseAuth.currentUser;
                             // alert(`Account created for ${data.user.email}`);
                             this.$router.go({path: this.$router.path});                  
                         },
@@ -175,8 +176,10 @@ button {
 .slogan{
     color: rgb(0, 0, 0);
     /* font-size: 0.90rem; */
-    font-size: 0.70rem; 
-    font-weight: 600;
+    font-size: 0.90rem; 
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
     text-align: center;
     /* text-transform: capitalize; */
 }
@@ -247,7 +250,7 @@ button {
       grid-gap: 40px;
     }
     .slogan {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     .sign-up, .sign-in {
         font-size: 0.70rem;
@@ -257,6 +260,9 @@ button {
 @media only screen and (min-width: 1600px) {
     .head {
         margin: 40px 0;
+    }
+    .slogan {
+        font-size: 1.25rem;
     }
 }
 </style>
